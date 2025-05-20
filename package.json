@@ -12,6 +12,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/jest": "^29.5.14",
+    "@types/sequelize": "^4.28.20",
     "express": "^4.17.3",
     "sequelize": "^6.21.4",
     "sqlite3": "^5.0.11",
