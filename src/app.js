@@ -10,4 +10,13 @@ app.get("/restaurants", async (request, resposne) => {
     resposne.json(restaurants);
 })
 
+app.get("/restaurants/:id", async (req, res, next) => {
+    try {
+        const restaurant = await Restaurant.findByPk(req.params.id);
+        res.status(200).json(restaurant);
+    } catch (err) {
+        next(err);
+    }
+})
+
 module.exports = app;
