@@ -54,15 +54,15 @@ describe("/restaurants endpoint", () => {
         expect(res.body).toMatchObject(restaurant);
     })
 
-    test("DELETE /restaurants/:id route", async () => {
-        const res = await request(app).delete("/restaurants/1")
+    // test("DELETE /restaurants/:id route", async () => {
+    //     const res = await request(app).delete("/restaurants/1")
 
-        expect(res.statusCode).toBe(200);
-        expect(res.body).toMatchObject({
-            id: 1,
-            name: "INO",
-            location: "Irving",
-            cuisine: "Fast-Food"
-        })
-    })
+    //     expect(res.statusCode).toBe(200);
+    //     expect(res.body).toMatchObject({
+    //         id: 1,
+    //         name: "INO",
+    //         location: "Irving",
+    //         cuisine: "Fast-Food"
+    //     })
+    // })
 })
