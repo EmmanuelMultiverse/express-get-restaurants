@@ -40,6 +40,29 @@ describe("/restaurants endpoint", () => {
         expect(res.body).toMatchObject(restaurant);
     })
 
+    test("POST /restaurants route with bad request should return error", async () => {
+        // Bad request because it is missing name field
+        const badRequest = {
+            location: "Irving",
+            cuisine: "Fast-Food",
+
+        }
+
+        const res = await request(app).post("/restaurants").send(badRequest);
+        
+        expect(res.statusCode).toBe(200);
+        expect(res.body).toMatchObject({
+            "error": [
+                {
+                    "type": "field",
+                    "msg": "Invalid value",
+                    "path": "name",
+                    "location": "body"
+                }
+            ]
+        })
+    })
+
     test("PUT /restaurants/:id route", async () => {
         const restaurant = {
             name: "INO",
