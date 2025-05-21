@@ -28,7 +28,7 @@ describe("/restaurants endpoint", () => {
 
     test("POST /restaurants route", async () => {
         const restaurant = {
-            name: "INO",
+            name: "INOINOINOINO",
             location: "Irving",
             cuisine: "Fast-Food",
 
@@ -40,7 +40,7 @@ describe("/restaurants endpoint", () => {
         expect(res.body).toMatchObject(restaurant);
     })
 
-    test("POST /restaurants route with bad request should return error", async () => {
+    test("POST /restaurants route with bad request - no name should return error", async () => {
         // Bad request because it is missing name field
         const badRequest = {
             location: "Irving",
@@ -55,6 +55,38 @@ describe("/restaurants endpoint", () => {
             "error": [
                 {
                     "type": "field",
+                    "msg": "Invalid value",
+                    "path": "name",
+                    "location": "body"
+                },
+                {
+                    "type": "field",
+                    "value": "",
+                    "msg": "Invalid value",
+                    "path": "name",
+                    "location": "body"
+                }
+            ]
+        })
+    })
+
+    test("POST /restaurants route with bad request - invalid length should return error", async () => {
+        // Bad request because it is missing name field
+        const badRequest = {
+            name: "longNameeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            location: "Irving",
+            cuisine: "Fast-Food",
+
+        }
+
+        const res = await request(app).post("/restaurants").send(badRequest);
+        
+        expect(res.statusCode).toBe(200);
+        expect(res.body).toMatchObject({
+            "error": [
+                {
+                    "type": "field",
+                    "value": "longNameeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
                     "msg": "Invalid value",
                     "path": "name",
                     "location": "body"
